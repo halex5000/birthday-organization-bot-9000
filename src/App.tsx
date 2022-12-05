@@ -14,7 +14,7 @@ function App() {
           </Header>
           <Box height="large" animation={{ type: 'jiggle', duration: 2000}}>
             <Main>
-              <Image src='./src/assets/pusheeen-cheeseburger.png' fit="contain"/>
+              <Image src='pusheeen-cheeseburger.png' fit="contain"/>
             </Main>
           </Box>
           <Footer background="accent-2" pad="medium">

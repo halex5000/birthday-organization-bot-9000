@@ -1,4 +1,4 @@
-import {Box, Footer, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent} from 'grommet'
+import {Box, Footer, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock} from 'grommet'
 import React from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
 
@@ -12,8 +12,8 @@ function App() {
       <Box background="accent-2">
         <Heading color="white" alignSelf='center'>Welcome to Isa's Birthday Site!</Heading>
       </Box>
-      <Box height="large" animation={{ type: 'jiggle', duration: 2000}}>
-        <Main>
+      <Box height="large">
+        <Main animation={{ type: 'jiggle', duration: 2000}}>
           <Image src={pusheenCheeseburger} fit="contain"/>
         </Main>
       </Box>

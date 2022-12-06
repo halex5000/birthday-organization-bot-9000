@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
 import * as Icons from 'grommet-icons'
 import FlipCountdown from '@rumess/react-flip-countdown';
+import axios from 'axios'
+import {nanoid} from 'nanoid'
 
 const initialMessages = [
   {
@@ -51,6 +53,10 @@ function App() {
       text: value,
     }])
     setValue('');
+    // axios.post('https://dkhdcpjmr5.execute-api.us-east-1.amazonaws.com/default/bob-message-handler', {
+    //   pk: nanoid(),
+    //   sk: Date.now().toString(),
+    // })
   }
 
   const addBotMessage = (message: {sender: string; text: string}) => {
@@ -86,7 +92,7 @@ function App() {
             </CardHeader>
             <CardBody pad="x-small" align="center">
               <FlipCountdown 
-                size="small"
+                size="medium"
                 yearTitle='Year'
                 monthTitle='Months'
                 dayTitle='Days'
@@ -129,7 +135,7 @@ function App() {
         <Box animation={{ type: 'jiggle', duration: 2000}} gridArea="main">
           <Image src={pusheenCheeseburger} fit="contain"/>
         </Box>
-        <Box background="accent-3" gridArea="right-bar">
+        {/* <Box background="accent-3" gridArea="right-bar">
           <Card  width="medium">
             <CardHeader background="accent-2" pad="small">
               <Text color="white">The more you tell, the better I can plan!</Text>
@@ -183,7 +189,7 @@ function App() {
               </Footer>
             </CardFooter>
           </Card>
-        </Box>
+        </Box> */}
         <Box align="center" background="accent-2" pad="medium" flex gridArea='footer'>
           <Text  alignSelf='center' color="white">A creation of the Birthday Organizing Bot 9000 aka BOB</Text>
         </Box>

@@ -16,14 +16,14 @@ export type DragIIProps = {
 export default function DragII({ data = [], width, height }: DragIIProps) {
   const [lines, setLines] = useState<Lines>(data);
   const onDragStart = useCallback(
-    (currDrag: { x: any; y: any; }) => {
+    (currDrag: { x?: any; y?: any; }) => {
       // add the new line with the starting point
       setLines((currLines) => [...currLines, [{ x: currDrag.x, y: currDrag.y }]]);
     },
     [setLines],
   );
   const onDragMove = useCallback(
-    (currDrag: { x: any; dx: any; y: any; dy: any; }) => {
+    (currDrag: { x?: any; dx: any; y?: any; dy: any; }) => {
       // add the new point to the current line
       setLines((currLines) => {
         const nextLines = [...currLines];
@@ -107,14 +107,8 @@ export default function DragII({ data = [], width, height }: DragIIProps) {
           />
         </g>
       </svg>
-      <div className="deets">
-        <div>
-          Based on Mike Bostock's{' '}
-          <a href="https://bl.ocks.org/mbostock/f705fc55e6f26df29354">Line Drawing</a>
-        </div>
-      </div>
 
-      <style jsx>{`
+      <style>{`
         .DragII {
           display: flex;
           flex-direction: column;

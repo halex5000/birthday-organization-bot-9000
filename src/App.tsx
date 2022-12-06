@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
 import * as Icons from 'grommet-icons'
 import FlipCountdown from '@rumess/react-flip-countdown';
+import DrawingBoard from './DrawingBoard'
 import axios from 'axios'
 import {nanoid} from 'nanoid'
 
@@ -40,6 +41,12 @@ const responses = [
   }
 ];
 
+const SketchPad = () => (
+  <DrawingBoard width={400} height={400}/>
+);
+
+// const WordGame = () => ();
+
 function App() {
   
   const size = React.useContext(ResponsiveContext);
@@ -74,7 +81,7 @@ function App() {
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
       <Grid
         gap="small"
-        columns={['3/12', '4/12', '3/12']}
+        columns={['2/12', '2/12', '5/12']}
         rows={['xsmall', 'large', 'xsmall']}
         areas={[
           ['header', 'header', 'header'],
@@ -85,7 +92,7 @@ function App() {
         <Box background="accent-2" gridArea="header">
           <Heading color="white" alignSelf='center'>Welcome to Isa's Birthday Site!</Heading>
         </Box>
-        <Box flex overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="left-bar">
+        <Box overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="left-bar">
           <Card  width="medium">
             <CardHeader background="accent-2" pad="small">
               <Text color="white">Countdown to Isa's Birthday</Text>
@@ -135,61 +142,16 @@ function App() {
         <Box animation={{ type: 'jiggle', duration: 2000}} gridArea="main">
           <Image src={pusheenCheeseburger} fit="contain"/>
         </Box>
-        {/* <Box background="accent-3" gridArea="right-bar">
+        <Box flex overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="right-bar">
           <Card  width="medium">
             <CardHeader background="accent-2" pad="small">
-              <Text color="white">The more you tell, the better I can plan!</Text>
+              <Text color="white">Feel like doodling?</Text>
             </CardHeader>
-            <CardBody>
-              <Grid
-                  columns={['1/2', '1/2']}
-                  rows={['xsmall', 'large', 'xsmall']}
-                  areas={[
-                    ['chat-header', 'chat-header'],
-                    ['chat', 'chat'],
-                    ['chat-footer', 'chat-footer'],
-                  ]}
-                >
-                  <Box gridArea='chat' pad="xxsmall">
-                      {messages.map(message => { 
-                        return message.sender === 'bot' ? 
-                          (
-                            <Card elevation='none' align="end" gridArea="bot">
-                              <CardBody >
-                                <Box pad="small" background="light-4" elevation="large" round={{corner: 'bottom-left'}}>
-                                  <Text>{message.text}</Text>
-                                </Box>
-                              </CardBody>
-                            </Card>
-                          )
-                          :
-                          (
-                            <Card elevation='none' align="start" gridArea="isa">
-                              <CardBody >
-                                <Box pad="small" background="light-1" elevation="large" round={{corner: 'bottom-right'}}>
-                                  <Text>{message.text}</Text>
-                                </Box>
-                              </CardBody>
-                            </Card>
-                          )
-                      })}
-                  </Box>
-                </Grid>
+            <CardBody pad="x-small" align="center">
+              <SketchPad />
             </CardBody>
-            <CardFooter background="brand">
-              <Footer pad="small" gridArea='chat-footer'>
-                <TextInput 
-                  placeholder="tell me more about you!"
-                  value={value}
-                  onChange={event => setValue(event.target.value)}>
-                </TextInput>
-                <Box pad="small" align="center">
-                  <Button primary label="Send" onClick={() => { addMessage() }}/>
-                </Box>
-              </Footer>
-            </CardFooter>
           </Card>
-        </Box> */}
+        </Box>
         <Box align="center" background="accent-2" pad="medium" flex gridArea='footer'>
           <Text  alignSelf='center' color="white">A creation of the Birthday Organizing Bot 9000 aka BOB</Text>
         </Box>

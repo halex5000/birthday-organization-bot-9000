@@ -11,11 +11,12 @@
   "dependencies": {
     "@fluentui/react": "^8.103.5",
     "@rumess/react-flip-countdown": "^1.2.6",
-    "@visx/curve": "file:visx/drag@visx/gradient@visx/responsive@visx/shape",
+    "@visx/curve": "^2.1.0",
     "@visx/drag": "^2.10.0",
     "@visx/gradient": "^2.10.0",
     "@visx/responsive": "^2.10.0",
     "@visx/shape": "^2.12.2",
+    "an-array-of-english-words": "^2.0.0",
     "axios": "^1.2.1",
     "grommet": "^2.28.0",
     "grommet-icons": "^4.8.0",

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fluentui/react": "^8.103.5",
+    "@rumess/react-flip-countdown": "^1.2.6",
     "@visx/curve": "file:visx/drag@visx/gradient@visx/responsive@visx/shape",
     "@visx/drag": "^2.10.0",
     "@visx/gradient": "^2.10.0",

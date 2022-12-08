@@ -1,4 +1,4 @@
-import {Box, Footer, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput} from 'grommet'
+import {Box, Footer, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput, Layer} from 'grommet'
 import React, { useEffect } from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
 import * as Icons from 'grommet-icons'
@@ -6,6 +6,7 @@ import FlipCountdown from '@rumess/react-flip-countdown';
 import DrawingBoard from './DrawingBoard'
 import axios from 'axios'
 import {nanoid} from 'nanoid'
+import MemoryGame from './MemoryGame';
 
 const initialMessages = [
   {
@@ -53,6 +54,7 @@ function App() {
 
   const [value, setValue] = React.useState('');
   const [messages, setMessages] = React.useState(initialMessages);
+  const [showMemory, setShowMemory] = React.useState(false)
 
   const addMessage = () => {
     setMessages([...messages, {
@@ -77,8 +79,18 @@ function App() {
     }
   }, [messages])
 
+
+
   return (
+    
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
+      {showMemory && (
+        <Layer background="#406bff" full>
+          <MemoryGame />
+          <Button label="close" onClick={() => setShowMemory(false)} />
+        </Layer>
+        )
+      }
       <Grid
         gap="small"
         columns={['2/12', '2/12', '5/12']}
@@ -89,9 +101,10 @@ function App() {
           ['footer', 'footer', 'footer']
         ]}
     >
-        <Box background="accent-2" gridArea="header">
+        <Header background="accent-2" gridArea="header">
           <Heading color="white" alignSelf='center'>Welcome to Isa's Birthday Site!</Heading>
-        </Box>
+          <Button onClick={() => {setShowMemory(!showMemory)}} primary label="Play Animal Crossing Memory" />
+        </Header>
         <Box overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="left-bar">
           <Card  width="medium">
             <CardHeader background="accent-2" pad="small">

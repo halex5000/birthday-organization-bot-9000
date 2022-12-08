@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fluentui/react": "^8.103.5",
     "@rumess/react-flip-countdown": "^1.2.6",
     "@visx/curve": "^2.1.0",
     "@visx/drag": "^2.10.0",

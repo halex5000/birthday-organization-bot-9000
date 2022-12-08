@@ -86,8 +86,8 @@ function App() {
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
       {showMemory && (
         <Layer background="#406bff" full>
-          <MemoryGame />
           <Button label="close" onClick={() => setShowMemory(false)} />
+          <MemoryGame />
         </Layer>
         )
       }
@@ -122,34 +122,6 @@ function App() {
                 endAt={"2022-12-10 00:00:00"}
               />
             </CardBody>
-          </Card>
-          <Card  height="medium" width="medium">
-            <CardHeader background="accent-2" pad="small">
-              <Text color="white">Birthday Algorithm Learning</Text>
-            </CardHeader>
-            <CardBody pad="x-small" align="center">
-              <Box align="center" pad="large">
-                <Stack anchor="center">
-                  <Meter
-                    type="circle"
-                    background="accent-2"
-                    color='white'
-                    value={12}
-                    size="small"
-                    thickness="small"
-                  />
-                  <Box direction="row" align="center" pad={{ bottom: 'xsmall' }}>
-                    <Text size="xlarge" weight="bold">
-                      {12}
-                    </Text>
-                    <Text size="small">%</Text>
-                  </Box>
-                </Stack>
-              </Box>
-            </CardBody>
-            <CardFooter pad="medium" background="accent-3">
-              <Text textAlign='center'>Insufficient information for birthday recommendations!</Text>
-            </CardFooter>
           </Card>
         </Box>
         <Box animation={{ type: 'jiggle', duration: 2000}} gridArea="main">

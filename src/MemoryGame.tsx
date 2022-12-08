@@ -26,8 +26,8 @@ const Card = ({path, clickHandler, opacity, id}: {path: string; clickHandler: Fu
       <Box 
         background="#FF386B" 
         margin="5px" 
-        width="150px" 
-        height="150px" 
+        width="125px" 
+        height="125px" 
         elevation="xlarge" 
         onClick={() => {
           clickHandler({path, id}); 

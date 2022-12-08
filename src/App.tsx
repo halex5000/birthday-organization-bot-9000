@@ -94,9 +94,7 @@ function App() {
             <Grid      
               gap="small"
               margin="2%"
-              style={{
-                marginLeft: "15%"
-              }}
+              justify='center'
             >
               <Box direction='column' flex>
                 <Box direction='row'>

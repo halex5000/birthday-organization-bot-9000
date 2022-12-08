@@ -1,4 +1,4 @@
-import { Box, Image} from "grommet"
+import { Box, Image, Grid as GrommetGrid} from "grommet"
 import { useEffect, useState } from "react";
 import { images } from './images';
 
@@ -32,6 +32,7 @@ const Card = ({path, clickHandler, opacity, id}: {path: string; clickHandler: Fu
         onClick={() => {
           clickHandler({path, id}); 
         }}
+        animation={opacity === "1" ? {type: "zoomIn"} : {type: "fadeIn", delay: 250}}
       >
         <Image src={`src/assets/${path}`} opacity={opacity}/>
       </Box>
@@ -65,8 +66,10 @@ const Grid = ({cards}: {cards: {id: string, path: string}[][]}) => {
         setMatchedCards([...matchedCards, selectedCardOne.id, selectedCardTwo.id])
       } else {
         console.log('no card match!!');
-        setSelectedCardOne(defaultSelected);
-        setSelectedCardTwo(defaultSelected);
+        setTimeout(() => {
+          setSelectedCardOne(defaultSelected);
+          setSelectedCardTwo(defaultSelected);
+        }, 1000)
       }
     }
   }, [selectedCardOne, selectedCardTwo])
@@ -79,7 +82,7 @@ const Grid = ({cards}: {cards: {id: string, path: string}[][]}) => {
             {
               row.map(({path, id}) => {
                 const opacity = selectedCardOne.id === id || selectedCardTwo.id === id ||  matchedCards.includes(id) ? "1" : "0";
-                return <Card key={id} path={path} id={id} clickHandler={clickHandler} opacity={opacity}/>
+                return <Card key={id} path={path} id={id} clickHandler={clickHandler} opacity={opacity} />
               })
             }
           </Box>
@@ -91,7 +94,7 @@ const Grid = ({cards}: {cards: {id: string, path: string}[][]}) => {
 
 const Game = ({cards}: {cards: {id: string, path: string}[][]}) => {
   return (
-    <Box>
+    <Box gridArea="main" flex>
       <Grid cards={cards} />
     </Box>
   )
@@ -137,7 +140,12 @@ const MemoryGame = () => {
   }));
 
   return (
-    <Game cards={cards}/>
+    <GrommetGrid         
+      gap="xsmall"
+      columns={['3/12', '6/12', '3/12']}
+    >
+      <Game cards={cards}/>
+    </GrommetGrid>
   )
 }
 

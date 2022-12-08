@@ -34,7 +34,7 @@ const Card = ({path, clickHandler, opacity, id}: {path: string; clickHandler: Fu
         }}
         animation={opacity === "1" ? {type: "zoomIn"} : {type: "fadeIn", delay: 250}}
       >
-        <Image src={`src/assets/${path}`} opacity={opacity}/>
+        <Image src={`${path}`} opacity={opacity}/>
       </Box>
     </>    
   )

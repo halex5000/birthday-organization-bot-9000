@@ -11,9 +11,10 @@ export type DragIIProps = {
   width: number;
   height: number;
   data?: Lines;
+  id: string;
 };
 
-export default function DragII({ data = [], width, height }: DragIIProps) {
+export default function DragII({ data = [], width, height, id }: DragIIProps) {
   const [lines, setLines] = useState<Lines>(data);
   const onDragStart = useCallback(
     (currDrag: { x?: any; y?: any; }) => {
@@ -52,7 +53,7 @@ export default function DragII({ data = [], width, height }: DragIIProps) {
 
   return width < 10 ? null : (
     <div className="DragII" style={{ touchAction: 'none' }}>
-      <svg width={width} height={height} id="doodle">
+      <svg width={width} height={height} id={id}>
         <LinearGradient id="stroke" from="#ff614e" to="#ffdc64" />
         <rect fill="#04002b" width={width} height={height} rx={14} />
         {lines.map((line, i) => (

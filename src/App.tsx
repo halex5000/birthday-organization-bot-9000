@@ -1,4 +1,4 @@
-import {Box, Footer, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput, Layer} from 'grommet'
+import {Box, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput, Layer} from 'grommet'
 import React, { useEffect } from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
 import * as Icons from 'grommet-icons'
@@ -43,12 +43,12 @@ const responses = [
   }
 ];
 
-const SketchPad = () => (
-  <DrawingBoard width={400} height={400}/>
+const SketchPad = ({id}:{id: string}) => (
+  <DrawingBoard width={400} height={400} id={id}/>
 );
 
-const saveImage = () => {
-  saveSvgAsPng(document.getElementById("doodle"), "doodle.png");
+const saveImage = (id: string) => {
+  saveSvgAsPng(document.getElementById(id), "doodle.png");
 }
 
 function App() {
@@ -58,6 +58,7 @@ function App() {
   const [value, setValue] = React.useState('');
   const [messages, setMessages] = React.useState(initialMessages);
   const [showMemory, setShowMemory] = React.useState(false)
+  const [showCanvas, setShowCanvas] = React.useState(false)
 
   const addMessage = () => {
     setMessages([...messages, {
@@ -87,6 +88,28 @@ function App() {
   return (
     
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
+      {
+        showCanvas && (
+          <Layer background="#406bff" full>
+            <Grid      
+              gap="small"
+              margin="2%"
+              style={{
+                marginLeft: "15%"
+              }}
+            >
+              <Box direction='column' flex>
+                <Box direction='row'>
+                  <Button label="close" onClick={() => setShowCanvas(false)} />
+                  <Button label="save" onClick={() => saveImage('bigdoodle')} />
+                </Box>
+                <DrawingBoard width={1400} height={800} id="bigdoodle"/>
+              </Box>
+            </Grid>
+          </Layer>
+        )
+      }
+
       {showMemory && (
         <Layer background="#406bff" full>
           <Button label="close" onClick={() => setShowMemory(false)} />
@@ -136,10 +159,11 @@ function App() {
               <Text color="white">Feel like doodling?</Text>
             </CardHeader>
             <CardBody pad="x-small" align="center">
-              <SketchPad />
+              <SketchPad id='doodle'/>
             </CardBody>
             <CardFooter justify='center'>
-              <Button size='large' style={{marginBottom: '15px'}}  primary label="Save your doodle!" onClick={saveImage}/>
+              <Button size='large' style={{margin: '10px'}}  secondary label="Big Doodle Please!!" onClick={() => {setShowCanvas(true)}}/>
+              <Button size='large' style={{margin: '10px'}}  primary label="Save your doodle!" onClick={() => {saveImage('doodle')}}/>
             </CardFooter>
           </Card>
         </Box>

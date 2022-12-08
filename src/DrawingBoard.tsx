@@ -52,7 +52,7 @@ export default function DragII({ data = [], width, height }: DragIIProps) {
 
   return width < 10 ? null : (
     <div className="DragII" style={{ touchAction: 'none' }}>
-      <svg width={width} height={height}>
+      <svg width={width} height={height} id="doodle">
         <LinearGradient id="stroke" from="#ff614e" to="#ffdc64" />
         <rect fill="#04002b" width={width} height={height} rx={14} />
         {lines.map((line, i) => (

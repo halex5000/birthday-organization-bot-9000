@@ -7,6 +7,7 @@ import DrawingBoard from './DrawingBoard'
 import axios from 'axios'
 import {nanoid} from 'nanoid'
 import MemoryGame from './MemoryGame';
+import {saveSvgAsPng} from 'save-svg-as-png'
 
 const initialMessages = [
   {
@@ -46,7 +47,9 @@ const SketchPad = () => (
   <DrawingBoard width={400} height={400}/>
 );
 
-// const WordGame = () => ();
+const saveImage = () => {
+  saveSvgAsPng(document.getElementById("doodle"), "doodle.png");
+}
 
 function App() {
   
@@ -135,6 +138,9 @@ function App() {
             <CardBody pad="x-small" align="center">
               <SketchPad />
             </CardBody>
+            <CardFooter justify='center'>
+              <Button size='large' style={{marginBottom: '15px'}}  primary label="Save your doodle!" onClick={saveImage}/>
+            </CardFooter>
           </Card>
         </Box>
         <Box align="center" background="accent-2" pad="medium" flex gridArea='footer'>

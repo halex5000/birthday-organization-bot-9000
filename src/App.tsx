@@ -1,47 +1,12 @@
-import {Box, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput, Layer} from 'grommet'
+import {Box, Header, Image, ResponsiveContext, Text, Main, Heading, Page, PageContent, Clock, Button, Card, CardBody, CardFooter, CardHeader, Meter, Stack, Sidebar, Grid, TextInput, Layer, Keyboard} from 'grommet'
 import React, { useEffect } from 'react';
 import pusheenCheeseburger from './assets/pusheeen-cheeseburger.png'
-import * as Icons from 'grommet-icons'
 import FlipCountdown from '@rumess/react-flip-countdown';
 import DrawingBoard from './DrawingBoard'
-import axios from 'axios'
-import {nanoid} from 'nanoid'
 import MemoryGame from './MemoryGame';
 import {saveSvgAsPng} from 'save-svg-as-png'
+import Wordle from './Wordle';
 
-const initialMessages = [
-  {
-    sender: 'bot',
-    text: 'Tell me more about yourself!'
-  },
-];
-
-const responses = [
-  {
-    sender: 'bot',
-    text: 'cool, thanks!'
-  },
-  {
-    sender: 'bot',
-    text: 'okay, good to know...'
-  },
-  {
-    sender: 'bot',
-    text: 'this is so helpful!'
-  },
-  {
-    sender: 'bot',
-    text: 'thanks for being willing to tell me things!'
-  },
-  {
-    sender: 'bot',
-    text: 'oh, that is interesting...'
-  },
-  {
-    sender: 'bot',
-    text: 'thanks for telling me that!'
-  }
-];
 
 const SketchPad = ({id}:{id: string}) => (
   <DrawingBoard width={400} height={400} id={id}/>
@@ -54,40 +19,42 @@ const saveImage = (id: string) => {
 function App() {
   
   const size = React.useContext(ResponsiveContext);
-
-  const [value, setValue] = React.useState('');
-  const [messages, setMessages] = React.useState(initialMessages);
   const [showMemory, setShowMemory] = React.useState(false)
   const [showCanvas, setShowCanvas] = React.useState(false)
-
-  const addMessage = () => {
-    setMessages([...messages, {
-      sender: 'isa',
-      text: value,
-    }])
-    setValue('');
-    // axios.post('https://dkhdcpjmr5.execute-api.us-east-1.amazonaws.com/default/bob-message-handler', {
-    //   pk: nanoid(),
-    //   sk: Date.now().toString(),
-    // })
-  }
-
-  const addBotMessage = (message: {sender: string; text: string}) => {
-    setMessages([...messages, message])
-  }
-
-  useEffect(() => {
-    const randomResponse = Math.floor(Math.random() * 6)
-    if (messages[messages.length - 1].sender === 'isa') {
-      addBotMessage(responses[randomResponse])
-    }
-  }, [messages])
-
-
+  const [showWordle, setShowWordle] = React.useState(false)
+  const [typedWord, setTypedWord] = React.useState('')
 
   return (
     
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
+      {
+        showWordle && (
+          <Keyboard 
+            onKeyDown={(event) => {
+              if (!["Enter", "Backspace"].includes(event.key) && event.key.match(/a-zf/)) {
+                console.log('do something');
+              }
+              setTypedWord(typedWord + event.key)
+              console.log(typedWord + event.key)
+            }}
+            onBackspace={() => {
+              setTypedWord(typedWord.substring(0, typedWord.length - 1));
+              console.log('backspace pressed');
+            }}>
+            <Layer full>
+  <           Grid      
+                gap="small"
+                margin="2%"
+                justify='center'
+              >
+                <Box direction='column' flex>
+                  <Wordle typedWord={typedWord} closeHandler={() => {setShowWordle(false)}}/>
+                </Box>
+              </Grid>
+            </Layer>
+          </Keyboard>
+        )
+      }
       {
         showCanvas && (
           <Layer background="#406bff" full>
@@ -127,7 +94,12 @@ function App() {
     >
         <Header background="accent-2" gridArea="header">
           <Heading color="white" alignSelf='center'>Welcome to Isa's Birthday Site!</Heading>
-          <Button onClick={() => {setShowMemory(!showMemory)}} primary label="Play Animal Crossing Memory" />
+          <Box direction="column" align="center" gap="small" pad="xsmall">
+            <Button onClick={() => {setShowMemory(!showMemory)}} primary label="Play Animal Crossing Memory" />
+            <Button style={{
+              width: '100%'
+            }} onClick={() => {setShowWordle(!showWordle)}} primary label="Play Gamer Wordle" />
+          </Box>
         </Header>
         <Box overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="left-bar">
           <Card  width="medium">

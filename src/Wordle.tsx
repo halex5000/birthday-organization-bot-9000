@@ -41,16 +41,16 @@ const Card = ({color, elevation, letter}: {color?: string; elevation?: string; l
 
 const Game = ({
   word, 
-  guessedWords, 
   guessHandler, 
   guess, 
-  setGuess
+  setGuess,
+  rows,
 }: {
   word: string; 
-  guessedWords: string[]; 
   guessHandler: Function; 
   guess: string; 
   setGuess: Function
+  rows: { word: string; guess: string}[]
 }) => {
   return (
     <Box gridArea="main" flex direction="column" >
@@ -70,7 +70,7 @@ const Game = ({
         </Box>
       }
       {
-        Array(6).fill('').map((something, index) => {
+        rows.map(({word, guess}, index) => {
           return (
             <Box gap="small" flex key={index} direction="row" style={{padding: '8px'}}>
               {
@@ -88,7 +88,7 @@ const Game = ({
                                   return <Card key={letterIndex} color={"black"} elevation="none"/>
                                 }
                                 
-                                const guessedWord = guessedWords[index]
+                                const guessedWord = guess;
 
                                 let color = "#939598"
                                 if (guessedWord) {
@@ -147,8 +147,7 @@ const Wordle = ({closeHandler, typedWord}: {closeHandler: any, typedWord: string
         if (poppedWord) {
           setWord(poppedWord)
         }
-        
-        setGuessedWords([''])
+        setRows(Array(6).fill({word: poppedWord, guess: ''}))
       }
     }
   }, [genre])
@@ -174,9 +173,15 @@ const Wordle = ({closeHandler, typedWord}: {closeHandler: any, typedWord: string
       <Game 
         word={word} 
         setGuess={setGuess}
-        guessedWords={guessedWords} 
+        rows={rows}
         guessHandler={() => {
-          setGuessedWords([...guessedWords, guess])
+          for(let i = 0; i < rows.length; i++) {
+            if (!rows[i].guess) {
+              rows[i].guess = guess;
+            }
+            break;
+          }
+          setRows([...rows])
           setGuess('')
         }} 
         guess={guess}

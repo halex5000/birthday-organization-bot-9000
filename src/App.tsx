@@ -35,8 +35,8 @@ function App() {
                 margin="2%"
                 justify='center'
               >
-                <Box direction='column' flex>
-                  <Wordle typedWord={typedWord} closeHandler={() => {setShowWordle(false)}}/>
+                <Box direction='column' flex >
+                  <Wordle typedWord={typedWord} closeHandler={() => {setShowWordle(false)}} />
                 </Box>
               </Grid>
             </Layer>
@@ -85,7 +85,7 @@ function App() {
             <Button onClick={() => {setShowMemory(!showMemory)}} primary label="Play Animal Crossing Memory" />
             <Button style={{
               width: '100%'
-            }} onClick={() => {setShowWordle(!showWordle)}} primary label="Play Gamer Wordle" />
+            }} onClick={() => {setShowWordle(!showWordle)}} primary label="Play Gamer Wordle" disabled={true} />
           </Box>
         </Header>
         <Box overflow="auto" gap="medium" pad="medium" height="large" background="accent-3" gridArea="left-bar">

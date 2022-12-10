@@ -29,18 +29,6 @@ function App() {
     <Box background="brand" height="100%" fill flex pad="x-small" gap="medium" overflow="auto">
       {
         showWordle && (
-          <Keyboard 
-            onKeyDown={(event) => {
-              if (!["Enter", "Backspace"].includes(event.key) && event.key.match(/a-zf/)) {
-                console.log('do something');
-              }
-              setTypedWord(typedWord + event.key)
-              console.log(typedWord + event.key)
-            }}
-            onBackspace={() => {
-              setTypedWord(typedWord.substring(0, typedWord.length - 1));
-              console.log('backspace pressed');
-            }}>
             <Layer full>
   <           Grid      
                 gap="small"
@@ -52,7 +40,6 @@ function App() {
                 </Box>
               </Grid>
             </Layer>
-          </Keyboard>
         )
       }
       {
